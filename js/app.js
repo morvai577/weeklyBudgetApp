@@ -33,6 +33,24 @@ class HTML {
             addExpenseForm.reset();
         }, 3000);
     }
+
+    // Displays the expenses from the form into the list
+    addExpenseToList(name, amount) {
+        const expensesList = document.querySelector('#expenses ul');
+
+        // Create a li
+        const li = document.createElement('li');
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+
+        // Create the template
+        li.innerHTML = `
+            ${name}
+            <span class="badge badge-primary badge-pill">${amount}</span>
+        `;
+
+        // Insert into the HTML
+        expensesList.appendChild(li);
+    }
 }
 
 // Variables
@@ -76,7 +94,8 @@ function eventListeners() {
         if(expenseName === '' || amount === '') {
             html.printMessage('There was an error, all the fields are mandatory', 'alert-danger');
         } else {
-
+            // Add the expenses to the list
+            html.addExpenseToList(expenseName, amount);
         }
     });
 }
